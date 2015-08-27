@@ -16,8 +16,8 @@ var server = app.listen(3000, function () {
 
   //Tell the twitter API to filter on the watchSymbols
   
-  twit.stream('statuses/sample', function(stream) {
   pg.connect(conString, function(err, client, done) {
+  twit.stream('statuses/sample', function(stream) {
       stream.on('data', function (data) {
         if(data.user.lang == 'en')
         {
@@ -26,7 +26,8 @@ var server = app.listen(3000, function () {
             data.entities.hashtags.forEach(function(hashtag) {
               if(hashtag.text.indexOf('?') < 0) {
                 var strQuery = "INSERT INTO `tagQueue`.`tagQueue` (`id`, `hashtag`, `is_processed`) VALUES (NULL, '" +hashtag.text + "', b'0');";
-                client.query( strQuery, function(err, rows){
+                client.query(strQuery, ['1'], function(err, rows){
+                  done();
                 });
               }
             });

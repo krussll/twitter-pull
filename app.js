@@ -15,8 +15,16 @@ var server = app.listen(3000, function () {
   });
 
   //Tell the twitter API to filter on the watchSymbols
-  
-  pg.connect(conString, function(err, client, done) {
+  var client = new pg.Client({
+    user: "mflamcdycenfta",
+    password: "vZquJOViXYVS0_-Kg2HoXzY7qm",
+    database: "dcd4cdk7e284fc",
+    port: 5432,
+    host: "ec2-54-204-3-200.compute-1.amazonaws.com",
+    ssl: true
+}); 
+
+  client.connect(err) {
     if(err) {
     return console.error('error fetching client from pool', err);
   }

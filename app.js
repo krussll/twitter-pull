@@ -5,11 +5,7 @@ var express = require('express');
 var app = express();
 
 var server = app.listen(3000, function () {
-  var connection =  pg.createConnection({
-    	host : 'ec2-54-204-3-200.compute-1.amazonaws.com',
-    	user : 'mflamcdycenfta',
-    	password: 'vZquJOViXYVS0_-Kg2HoXzY7qm'
-    });
+  var conString = "postgres://mflamcdycenfta:vZquJOViXYVS0_-Kg2HoXzY7qm@ec2-54-204-3-200.compute-1.amazonaws.com:5432/dcd4cdk7e284fc";
 
   var twit = new twitter({
   consumer_key: 'Hw36acR3LCEJnlnzQhZXvlorx', // <--- FILL ME IN
@@ -20,23 +16,23 @@ var server = app.listen(3000, function () {
 
   //Tell the twitter API to filter on the watchSymbols
   twit.stream('statuses/sample', function(stream) {
-    connection.connect();
-    connection.query('use tagdaq');
-    stream.on('data', function (data) {
-      if(data.user.lang == 'en')
-      {
-        if (data.entities.hashtags.length > 0)
+    pg.connect(conString, function(err, client, done) {
+      stream.on('data', function (data) {
+        if(data.user.lang == 'en')
         {
-          data.entities.hashtags.forEach(function(hashtag) {
-            if(hashtag.text.indexOf('?') < 0) {
-              var strQuery = "INSERT INTO `tagdaq`.`tagQueue` (`id`, `hashtag`, `is_processed`) VALUES (NULL, '" +hashtag.text + "', b'0');";
-              connection.query( strQuery, function(err, rows){
-              });
-            }
-          });
+          if (data.entities.hashtags.length > 0)
+          {
+            data.entities.hashtags.forEach(function(hashtag) {
+              if(hashtag.text.indexOf('?') < 0) {
+                var strQuery = "INSERT INTO `tagQueue` (`id`, `hashtag`, `is_processed`) VALUES (NULL, '" +hashtag.text + "', b'0');";
+                client.query( strQuery, function(err, rows){
+                });
+              }
+            });
+          }
         }
-      }
-    });
+      });
+    }
 
     stream.on('end', function() {
       connection.destroy( );

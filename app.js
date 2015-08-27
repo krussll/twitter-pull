@@ -24,7 +24,7 @@ var server = app.listen(3000, function () {
     ssl: true
 }); 
 
-  client.connect(err) {
+  client.connect(function(err) {
     if(err) {
     return console.error('error fetching client from pool', err);
   }

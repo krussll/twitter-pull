@@ -16,22 +16,22 @@ var server = app.listen(3000, function () {
 
   //Tell the twitter API to filter on the watchSymbols
   
-  
+  var client = new pg.Client(conString);
+  client.connect(function(err) {
   twit.stream('statuses/sample', function(stream) {
       stream.on('data', function (data) {
         if(data.user.lang == 'en')
         {
-          pg.connect(conString, function(err, client, done) {
             if (data.entities.hashtags.length > 0)
             {
               data.entities.hashtags.forEach(function(hashtag) {
                 if(hashtag.text.indexOf('?') < 0) {
                   var strQuery = "INSERT INTO `tagQueue`.`tagQueue` (`id`, `hashtag`, `is_processed`) VALUES (NULL, '" +hashtag.text + "', b'0');";
-                  client.query(strQuery, ['1'], function(err, rows){
+                  client.query(strQuery, function(err, rows){
                     done();
                   });
                 }
-              });
+              
             }
           });
         }
@@ -42,5 +42,5 @@ var server = app.listen(3000, function () {
       connection.destroy( );
     });
   });
-  
+  });
 });

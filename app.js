@@ -15,8 +15,9 @@ var server = app.listen(3000, function () {
   });
 
   //Tell the twitter API to filter on the watchSymbols
+  
+  pg.connect(conString, function(err, client, done) {
   twit.stream('statuses/sample', function(stream) {
-    pg.connect(conString, function(err, client, done) {
       stream.on('data', function (data) {
         if(data.user.lang == 'en')
         {
@@ -32,10 +33,11 @@ var server = app.listen(3000, function () {
           }
         }
       });
-    }
+    
 
     stream.on('end', function() {
       connection.destroy( );
     });
+  });
   });
 });

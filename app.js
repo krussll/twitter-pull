@@ -28,7 +28,7 @@ var server = app.listen(3000, function () {
                 if(hashtag.text.indexOf('?') < 0) {
                   var strQuery = "INSERT INTO `tagQueue`.`tagQueue` (`id`, `hashtag`, `is_processed`) VALUES (NULL, '" +hashtag.text + "', b'0');";
                   client.query(strQuery, function(err, rows){
-                    done();
+                    
                   });
                 }
               }

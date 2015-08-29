@@ -1,4 +1,4 @@
-var forever = require('forever');
+var forever = require('forever-monitor');
 
 var child = new (forever.Monitor)('app.js', {
   max: 99999,

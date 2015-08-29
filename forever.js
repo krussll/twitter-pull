@@ -8,5 +8,3 @@ var child = new (forever.Monitor)('app.js', {
 
 //child.on('exit', this.callback);
 child.start();
-
-forever.startServer(child);

@@ -1,16 +1,31 @@
 {
-  "name": "twitter pull",
+  "name": "twitter_consumer",
   "version": "1.0.0",
-  "description": "This example is so cool.",
+  "description": "twitter",
   "main": "app.js",
-  "scripts": {
+  "bin": {
+    "twitter_consumer": "queue.js"
   },
-  "keywords": [
-    "heroku"
-  ],
-  "author": "tagdaq",
-  "license": "MIT",
   "dependencies": {
-    "nodemon": "~1.0.14"
+    "forever-monitor": "^1.6.0",
+    "express": "^4.13.1",
+    "pg": "^4.4.1",
+    "mysql": "^2.8.0",
+    "ntwitter": "^0.5.0",
+    "forever": "^0.15.1"
   },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krussll/twitter-pull.git"
+  },
+  "author": "reece",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krussll/twitter-pull/issues"
+  },
+  "homepage": "https://github.com/krussll/twitter-pull#readme"
 }

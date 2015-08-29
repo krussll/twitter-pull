@@ -1,4 +1,4 @@
-var forever = require('forever-monitor');
+var forever = require('forever');
 
 var child = new (forever.Monitor)('app.js', {
   max: 99999,
@@ -8,3 +8,5 @@ var child = new (forever.Monitor)('app.js', {
 
 //child.on('exit', this.callback);
 child.start();
+
+forever.startServer(child);

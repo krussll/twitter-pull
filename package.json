@@ -1,4 +1,9 @@
 
 {
-  
+  "dependencies": {
+        "requirejs": "~2.1.10",
+        "express": "~3.4.8",
+        "forever": "~0.15.1",
+        "nodemon": "~1.0.14"
+    },
 }

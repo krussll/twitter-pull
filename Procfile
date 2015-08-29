@@ -1,1 +1,1 @@
-web: node forever.js
+web: nodemon app.js

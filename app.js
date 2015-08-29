@@ -1,6 +1,5 @@
 var twitter = require('ntwitter');
 var pg = require('pg');
-
 var express = require('express');
 var app = express();
 
@@ -51,6 +50,7 @@ var server = app.listen(3000, function () {
 
     stream.on('end', function() {
       connection.destroy( );
+      process.exit(1);
     });
   });
   });

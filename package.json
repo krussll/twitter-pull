@@ -1,9 +1,20 @@
-
 {
+  "name": "twitter pull",
+  "version": "1.0.0",
+  "description": "This example is so cool.",
+  "main": "app.js",
+  "scripts": {
+  },
+  "keywords": [
+    "heroku"
+  ],
+  "author": "tagdaq",
+  "license": "MIT",
   "dependencies": {
-        "requirejs": "~2.1.10",
-        "express": "~3.4.8",
-        "forever": "~0.15.1",
-        "nodemon": "~1.0.14"
-    },
+    "express": "^4.9.8",
+    "nodemon": "~1.0.14"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
 }

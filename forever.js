@@ -1,7 +1,7 @@
 var forever = require('forever');
 
 var child = new (forever.Monitor)('app.js', {
-  max: 3,
+  max: 99999,
   silent: false,
   options: []
 });
